@@ -1,0 +1,14 @@
+$"Resident ID: {}\n" +
+$"Age: {}\n" +
+$"AmtWeekdays: {}\n" +
+$"AmtWeekends: {}\n" +
+$"Ethnicity: {}\n" +
+$"Gender: {}\n" +
+$"Gross Income: {}\n" +
+$"Marital Status: {}\n" +
+$"Nationality: {}\n" +
+$"Qualification: {}\n" +
+$"Region: {}\n" +
+$"Smoke: {}\n" +
+$"Type: {}\n" +
+$"Average: {}\n";

@@ -1,0 +1,24 @@
+Age: 25
+Gender: Female
+HighestQualification: No Qualification
+Age: 29
+Gender: Male
+HighestQualification: Degree
+Age: 28
+Gender: Male
+HighestQualification: Degree
+Age: 25
+Gender: Female
+HighestQualification: ONC/BTEC
+Age: 30
+Gender: Female
+HighestQualification: GCSE/O Level
+Age: 28
+Gender: Male
+HighestQualification: GCSE/CSE
+Age: 27
+Gender: Male
+HighestQualification: Higher/Sub Degree
+Age: 27
+Gender: Male
+HighestQualification: Degree

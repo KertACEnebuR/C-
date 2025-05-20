@@ -1,0 +1,51 @@
+﻿<Window x:Class="ParalimpiaGUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ParalimpiaGUI"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Szűrés ország vagy város alapján:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBox x:Name="szuresOrszagvagyVaros" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Width="450" TextChanged="szuresOrszagvagyVaros_TextChanged"/>
+
+        <DataGrid x:Name="sporolokDG" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Width="500" AutoGenerateColumns="False" SelectionChanged="sporolokDG_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="#" Binding="{Binding Id}" Width="70"/>
+                <DataGridTextColumn Header="rendező ország" Binding="{Binding Orszag}" Width="70"/>
+                <DataGridTextColumn Header="helyszín" Binding="{Binding Varos}" Width="70"/>
+                <DataGridTextColumn Header="év" Binding="{Binding Ev}" Width="70"/>
+                <DataGridTextColumn Header="arany" Binding="{Binding Arany}" Width="70"/>
+                <DataGridTextColumn Header="ezüst" Binding="{Binding Ezust}" Width="70"/>
+                <DataGridTextColumn Header="bronz" Binding="{Binding Bronz}" Width="70"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Label Content="kijelölt év:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" />
+        <Label x:Name="kijeloltev" Content="####" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" />
+
+        <Label Content="arany" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="bold"/>
+        <TextBox x:Name="aranyErmek" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="20" />
+
+        <Label Content="ezüst" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="bold"/>
+        <TextBox x:Name="ezustErmek" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="20" />
+        
+        <Label Content="bronz" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" FontWeight="bold"/>
+        <TextBox x:Name="bronzErmek" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Width="20" />
+
+        <Button x:Name="modositasBTN" Content="módosítási javaslat" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" Height="50"/>
+
+    </Grid>
+</Window>
