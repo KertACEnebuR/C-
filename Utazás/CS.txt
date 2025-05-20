@@ -1,0 +1,188 @@
+using System.IO;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Linq;
+
+namespace DLTfonok0904
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        public int szamlalo = 0;
+        public MainWindow()
+        {
+            InitializeComponent();
+
+            grb1.Visibility = Visibility.Collapsed;
+            lblBt.Visibility = Visibility.Collapsed;
+            lblBE.Visibility = Visibility.Collapsed;
+            dpc_ketto.Visibility = Visibility.Collapsed;
+            cmb_ketto.Visibility = Visibility.Collapsed;
+
+
+            grb2.Visibility = Visibility.Collapsed;
+            lblJ.Visibility = Visibility.Collapsed;
+            slr_1.Visibility = Visibility.Collapsed;
+            txb_szam2.Visibility = Visibility.Collapsed;
+
+            List<Utazas> utazas = new List<Utazas>();
+
+            foreach (var item in File.ReadAllLines(@"..\..\..\SRC\utasadat.txt"))
+            {
+                utazas.Add(new Utazas(item));
+            }
+
+            foreach (var item in utazas)
+            {
+                Console.WriteLine(item);
+            }
+
+            //11.feladat
+
+            for (int i = 0; i < 30; i++)
+            {
+                cmb_egy.Items.Add(i);
+            }
+
+            //12.feladat      
+
+            //13.feladat
+
+            dpc_egy.Text = $"{DateTime.Today}";
+
+            txb_felsz.Text = DateTime.Now.ToString("HH:mm");
+
+            //14.feladat
+
+
+        }
+
+        private void btn_UjWindow_Click(object sender, RoutedEventArgs e)
+        {
+            Newwindow p = new();
+
+            p.Show();
+        }
+
+        private void txb_felsz_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            
+        }
+
+        private void txb_azon_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            txb_azon.MaxLength = 7;
+            int szamlalo = txb_azon.Text.Length;
+            txb_szam.Text = $"{szamlalo} db";
+            
+        }
+
+        private void txb_szam_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            
+        }
+
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            slr_1.Maximum = 10; 
+            szamlalo = (int)slr_1.Value;
+            txb_szam2.Text = $"{szamlalo} db";
+        }
+
+        private void Radiobutton_Checked(object sender, RoutedEventArgs e)
+        {
+            if (rad1.IsChecked == true)
+            {
+                grb1.Visibility = Visibility.Visible;
+                lblBt.Visibility = Visibility.Visible;
+                lblBE.Visibility = Visibility.Visible;
+                dpc_ketto.Visibility = Visibility.Visible;
+                cmb_ketto.Visibility = Visibility.Visible;
+
+                grb2.Visibility = Visibility.Collapsed;
+                lblJ.Visibility = Visibility.Collapsed;
+                slr_1.Visibility = Visibility.Collapsed;
+                txb_szam2.Visibility = Visibility.Collapsed;
+            }
+
+            else if (rad2.IsChecked == true && rad1.IsChecked == false)
+            {
+                grb1.Visibility = Visibility.Collapsed;
+                lblBt.Visibility = Visibility.Collapsed;
+                lblBE.Visibility = Visibility.Collapsed;
+                dpc_ketto.Visibility = Visibility.Collapsed;
+                cmb_ketto.Visibility = Visibility.Collapsed;
+
+                grb2.Visibility = Visibility.Visible;
+                lblJ.Visibility = Visibility.Visible;
+                slr_1.Visibility = Visibility.Visible;
+                txb_szam2.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (cmb_egy.SelectedItem == null)
+            {
+                MessageBox.Show("Nem választott megállót!", "Hiba!");
+            }
+
+            else if (dpc_egy.SelectedDate == null)
+            {
+                MessageBox.Show("Nem adott meg dátumot!", "Hiba!");
+            }
+
+            else if (txb_felsz.Text != DateTime.Now.ToString("HH:mm"))
+            {
+                MessageBox.Show("Nem jó formátumban van a felszállás ideje!", "Hiba!");
+            }
+
+            else if (txb_azon.Text.Length != 7)
+            {
+                MessageBox.Show("A kártya azonosítója nem hét karakter hosszú! ", "Hiba!");
+            }
+
+            else if (int.Parse(txb_azon.Text) < 1)
+            {
+                MessageBox.Show("A kártya azonosítója nem pozitív egész szám! ", "Hiba!");
+            }
+
+            else if (cmb_ketto.SelectedItem == null && rad1.IsChecked == true)
+            {
+                MessageBox.Show("Nem adta meg a bérlet típusát!", "Hiba!");
+            }
+
+            else if (dpc_ketto.SelectedDate == null && rad1.IsChecked == true)
+            {
+                MessageBox.Show("Nem adta meg a bérlet érvényességi idejét!", "Hiba!");
+            }
+
+            else
+            {
+                StreamWriter sw = new StreamWriter(@"..\..\..\SRC\utasadat.txt", true);
+
+                if (cmb_ketto.Text != "JGY")
+                {
+                    sw.WriteLine($"\n{cmb_egy.SelectedItem} {dpc_egy.SelectedDate:yyyyMMdd}-{txb_felsz.Text:HHmm} {txb_azon.Text} {cmb_ketto.SelectedItem} {dpc_ketto.SelectedDate:yyMMdd}");
+                }
+
+                else
+                {
+                    sw.WriteLine($"\n{cmb_egy.SelectedItem} {dpc_egy.SelectedDate:yyyyMMdd}-{txb_felsz.Text:HHmm} {txb_azon.Text} {"JGY"} {szamlalo}");
+                }        
+                sw.Close();
+                MessageBox.Show("A felszállás tárolása sikeres volt!", "Sikeres!");
+            }
+        }
+    }
+}

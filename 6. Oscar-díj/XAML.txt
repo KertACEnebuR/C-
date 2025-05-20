@@ -1,0 +1,33 @@
+<Window x:Class="OscarDij.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OscarDij"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200*"/>
+            <ColumnDefinition Width="400*"/>
+            <ColumnDefinition Width="200*"/>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="lbl_filmek" Content="Oscar-díjas filmek" HorizontalAlignment="Center" Height="30" Margin="0,10,0,0" VerticalAlignment="Top" Width="180" FontSize="14"/>
+        <ListBox x:Name="lxb_filmek" HorizontalAlignment="Center" Height="397" Margin="0,58,0,0" VerticalAlignment="Top" Width="180"/>
+        <Label x:Name="lbl_cim" Content="Címe" HorizontalAlignment="Left" Height="30" Margin="10,25,0,0" VerticalAlignment="Top" Width="132" FontSize="14" Grid.Column="1"/>
+        <Label x:Name="lbl_ev" Content="Év" HorizontalAlignment="Left" Height="30" Margin="10,60,0,0" VerticalAlignment="Top" Width="132" FontSize="14" Grid.Column="1"/>
+        <Label x:Name="lbl_jeloles" Content="Jelölések száma" HorizontalAlignment="Left" Height="30" Margin="10,95,0,0" VerticalAlignment="Top" Width="132" FontSize="14" Grid.Column="1"/>
+        <Label x:Name="lbl_dij" Content="Díjak száma" HorizontalAlignment="Left" Height="30" Margin="10,130,0,0" VerticalAlignment="Top" Width="132" FontSize="14" Grid.Column="1"/>
+        <TextBox x:Name="txb_cim" Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="179,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" FontSize="14"/>
+        <TextBox x:Name="txb_ev" Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="179,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" FontSize="14"/>
+        <TextBox x:Name="txb_jeloles" Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="179,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" FontSize="14"/>
+        <TextBox x:Name="txb_dij" Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="179,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" FontSize="14"/>
+        <Button x:Name="btn_felvitel" Grid.Column="1" Content="Új film felvitele" HorizontalAlignment="Center" Height="30" Margin="0,165,0,0" VerticalAlignment="Top" Width="378" FontSize="14"/>
+        <Label x:Name="lbl_cim_legtobb" Content="Film címe" HorizontalAlignment="Left" Height="30" Margin="10,236,0,0" VerticalAlignment="Top" Width="132" FontSize="14" Grid.Column="1" Foreground="#FF8E8D8D"/>
+        <Button x:Name="btn_legtobb" Grid.Column="1" Content="Legtöbb díjat kapta" HorizontalAlignment="Left" Height="30" Margin="235,236,0,0" VerticalAlignment="Top" Width="154" FontSize="14"/>
+        <TextBox x:Name="txb_keresett" Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="10,305,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="201" FontSize="14" Text="Keresett film" Foreground="#FF8E8B8B"/>
+        <Button x:Name="btn_keres" Grid.Column="1" Content="Keres" HorizontalAlignment="Left" Height="30" Margin="235,305,0,0" VerticalAlignment="Top" Width="154" FontSize="14"/>
+        <Label x:Name="lbl_talalat" Content="Találat kiírása" HorizontalAlignment="Left" Height="30" Margin="11,390,0,0" VerticalAlignment="Top" Width="132" FontSize="14" Grid.Column="1" Foreground="#FF7F7A7A"/>
+
+    </Grid>
+</Window>

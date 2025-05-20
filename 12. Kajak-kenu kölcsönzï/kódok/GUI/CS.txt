@@ -1,0 +1,107 @@
+using System.IO;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace KajakkenuGUI
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        List<KajakKenu> kajakkenu = new List<KajakKenu>();
+        public MainWindow()
+        {
+            InitializeComponent();
+            //7.feladat
+
+            dtg_adatok.ItemsSource = kajakkenu;
+
+            for (int i = 6; i <= 21; i++)
+            {
+                cmb_ora.Items.Add(i);
+            }
+
+            for (int i = 0; i <= 60; i++)
+            {
+                cmb_perc.Items.Add(i);
+            }
+
+            foreach (var item in File.ReadLines(@"../../../SRC/kolcsonzes.txt").Skip(1))
+            {
+                kajakkenu.Add(new KajakKenu(item));
+            }
+
+            //13.feladat
+
+            foreach (var item in kajakkenu)
+            {
+                lbx_kiiras.Items.Add(item.ToString());
+            }
+        }
+
+        private void btn_idoTarolas_Click(object sender, RoutedEventArgs e)
+        {
+            if (cmb_ora.SelectedItem == null || cmb_perc.SelectedItem == null)
+            {
+                MessageBox.Show("Adjon meg egy időpontot!");
+                return;
+            }
+
+            int MegadottOra = (int)cmb_ora.SelectedItem;
+
+            int MegadottPerc = (int)cmb_perc.SelectedItem;
+
+            var VizenVan = kajakkenu
+                .Where(e => e.VizenVanE(MegadottOra, MegadottPerc))
+                .OrderBy(e => e.VisszahozatalOra)
+                .ToList();
+
+            if (VizenVan.Any())
+            {
+                dtg_adatok.ItemsSource = VizenVan;
+                dtg_uj.ItemsSource = VizenVan;
+            }
+            else
+            {
+                MessageBox.Show("Nincs semelyik hajó a vízen", "Nem található");
+                dtg_adatok.ItemsSource = null;
+            }
+           
+        }
+
+        private void btn_bevetel_Click(object sender, RoutedEventArgs e)
+        {
+            //14.feladat
+
+            int KolcsonzesDij = 1500;
+
+            int FelorakSzama = kajakkenu.Sum(e => e.FelOra());
+
+            lbl_BevetelEredmeny.Content = $"A napi bevétel: {FelorakSzama * KolcsonzesDij} Ft";
+        }
+
+        private void btn_ellenorzes_Click(object sender, RoutedEventArgs e)
+        {
+            var Azonosito = txb_azonosito.Text;
+            var Tipus = txb_azonosito_Copy.Text;
+            var EmberSzam = txb_azonosito_Copy1.Text;
+
+            //var Ellenorzes = kajakkenu.Where(e => e.ValosHajoE(Azonosito, Tipus, EmberSzam));
+
+        }
+
+        private void btn_serult_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+    }
+}

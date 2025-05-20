@@ -1,0 +1,78 @@
+using Population;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+
+
+namespace Population
+{
+    public partial class MainWindow : Window
+    {
+        private readonly List<Allampolgar> lakossag;
+        const int feladatokSzama = 5;
+
+        public MainWindow()
+        {
+            InitializeComponent();
+            lakossag = new List<Allampolgar>();
+
+            using var sr = new StreamReader(@"..\..\..\SRC\population.txt");
+            _ = sr.ReadLine();
+
+            while (!sr.EndOfStream)
+            {
+                lakossag.Add(new Allampolgar(sr.ReadLine()));
+            }
+
+            for (int i = 1; i <= feladatokSzama; i++)
+            {
+                feladatComboBox.Items.Add($"{i}.");
+            }
+
+            DataContext = this;
+            MegoldasTeljes.ItemsSource = lakossag;
+        }
+
+        private void FeladatComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            MegoldasMondatos.Content = null;
+            MegoldasLista.Items.Clear();
+            MegoldasTeljes.ItemsSource = null;
+
+            var methodName = $"Feladat{feladatComboBox.SelectedIndex + 1}";
+            var method = GetType().GetMethod(methodName, BindingFlags.NonPublic | BindingFlags.Instance);
+            method?.Invoke(this, null);
+        }
+
+        private void Feladat1()
+        {
+            
+        }
+
+        private void Feladat2()
+        {
+
+        }
+
+        private void Feladat3()
+        {
+
+        }
+
+        private void Feladat4()
+        {
+
+        }
+
+        private void Feladat5()
+        {
+
+        }
+
+    }
+}

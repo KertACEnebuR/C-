@@ -1,0 +1,66 @@
+using System.IO;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace LaptopsGUI
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        List<Laptop> laptops = new List<Laptop>();
+        public int db = 0;
+        public MainWindow()
+        {
+            InitializeComponent();
+
+            foreach (var item in File.ReadAllLines(@"..\..\..\SRC\laptops.txt").Skip(1))
+            {
+                laptops.Add(new Laptop(item));
+            }
+
+            int Gyartoszam = laptops
+                .GroupBy(e => e.Manufacturer.ManufacturerName)
+                .Count();
+
+            lbl_valasztas.Content = $"VÁLASSZON {Gyartoszam} GYÁRTÓ {laptops.Count} LAPTOPJAI KÖZÜL!";
+
+            for (int i = 0; i < laptops.Count; i++)
+            {
+                lbx_lista1.Items.Add($"{i + 1}. {laptops[i]}");
+            }
+        }
+
+        private void lbx_lista1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            lbx_adatok.Items.Clear();
+            if (lbx_lista1.SelectedIndex != null)
+            {
+                lbx_adatok.Items.Add($"Kategória\n\t{laptops[lbx_lista1.SelectedIndex + 1].Category.CategoryName}\n" +
+                                $"Képátló\n\t{laptops[lbx_lista1.SelectedIndex + 1].Felbontas}\n" +
+                                $"Felbontás\n\t{laptops[lbx_lista1.SelectedIndex + 1].Kepatlo}\n" +
+                                $"Processzor\n\t{laptops[lbx_lista1.SelectedIndex + 1].CPU}\n" +
+                                $"RAM\n\t{laptops[lbx_lista1.SelectedIndex + 1].RAM} GB\n" +
+                                $"Háttértár(ak)\n\t{laptops[lbx_lista1.SelectedIndex + 1].Storage}" +
+                                $"\nOperációs rendszer\n\t{laptops[lbx_lista1.SelectedIndex + 1].OS}" +
+                                $"\nÁr\n\t{Math.Round(laptops[lbx_lista1.SelectedIndex + 1].Price * 4.12)} Ft");
+                db++;
+            }
+        }
+
+        private void btn_kilepes_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show($"Ön {db} termékünket tekintette meg. Visszavárjuk!");
+            Close();
+        }
+    }
+}

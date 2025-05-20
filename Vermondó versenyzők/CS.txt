@@ -1,0 +1,69 @@
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.IO;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Shapes;
+//using VersmondoVersenyzok;
+
+namespace VersenyzoGUI
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        public List<Versenyzok> versenyzok = new List<Versenyzok>();
+        public MainWindow()
+        {
+            InitializeComponent();
+
+            //foreach (var item in File.ReadAllLines(@"..\..\..\SRC\selejtezo.txt"))
+            //{
+            //    versenyzok.Add(new Versenyzok(item));
+            //}
+
+            //10.feladat
+
+            List<int> pontszamok = new List<int>();
+
+            string[] p = txb_pontszamok.Text.Split(' ');
+
+            for (int i = 0; i < p.Length; i++)
+            {
+                pontszamok.Add(int.Parse(p[i]));
+            }
+
+            if (txb_pontszamok.Text == null)
+            {
+                lbl_kispEredmeny.Content = "0";
+                lbl_nagypEredmeny.Content = "0";
+                lbl_osszEredmeny.Content = "0";
+            }
+
+            else
+            {
+                lbl_kispEredmeny.Content = pontszamok.Min();
+                lbl_nagypEredmeny.Content = pontszamok.Max();
+                lbl_osszEredmeny.Content = pontszamok.Sum();
+            }
+       
+        }
+
+        //9.feladat
+
+        private void txb_pontszamok_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            txb_pontszamok.MaxLength = 12;
+            int szamlalo = txb_pontszamok.Text.Length / 2;
+            lbl_dbSzam.Content = $"{szamlalo} db";
+        }
+    }
+}

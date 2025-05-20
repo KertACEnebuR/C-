@@ -1,0 +1,29 @@
+namespace Setahajo
+{
+    public partial class MainWindow
+    {
+        public class Hajo
+        {
+            public int Sorszam { get; set; }
+            public string Nev { get; set; }
+            public string Tipus { get; set; }
+            public int MaxUtasSzam { get; set; }
+            public int NapiBerletiDij { get; set; }
+
+            public Hajo(string sor)
+            {
+                var r = sor.Split(',');
+                Sorszam = int.Parse(r[0]);
+                Nev = r[1];
+                Tipus = r[2];
+                MaxUtasSzam = int.Parse(r[3]);
+                NapiBerletiDij = int.Parse(r[4]);
+            }
+
+            public int Osszar(int napSzam)
+            {
+                return napSzam * NapiBerletiDij;
+            }
+        }
+    }
+}

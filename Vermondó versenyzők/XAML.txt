@@ -1,0 +1,24 @@
+<Window x:Class="VersenyzoGUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VersenyzoGUI"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Label x:Name="lbl_Nev" Content="Versenyző neve:" HorizontalAlignment="Left" Height="34" Margin="22,50,0,0" VerticalAlignment="Top" Width="281" FontSize="16"/>
+        <Label x:Name="lbl_pontsz" Content="Versenyző pontszámai:" HorizontalAlignment="Left" Height="34" Margin="22,108,0,0" VerticalAlignment="Top" Width="281" FontSize="16"/>
+        <Label x:Name="lbl_nagyp" Content="Kieső legmagasabb pontszám:" HorizontalAlignment="Left" Height="34" Margin="22,166,0,0" VerticalAlignment="Top" Width="281" FontSize="16"/>
+        <Label x:Name="lbl_kisp" Content="Kieső legalacsonyabb pontszám:" HorizontalAlignment="Left" Height="34" Margin="22,217,0,0" VerticalAlignment="Top" Width="281" FontSize="16"/>
+        <Label x:Name="lbl_osszP" Content="A versenyző összesített pontszáma:" HorizontalAlignment="Left" Height="34" Margin="22,269,0,0" VerticalAlignment="Top" Width="281" FontSize="16"/>
+        <TextBox x:Name="txb_nev" HorizontalAlignment="Left" Height="34" Margin="346,50,0,0" VerticalAlignment="Top" Width="215" FontSize="18" TextWrapping="Wrap"/>
+        <TextBox x:Name="txb_pontszamok" HorizontalAlignment="Left" Height="34" Margin="346,108,0,0" VerticalAlignment="Top" Width="215" FontSize="18" TextChanged="txb_pontszamok_TextChanged" TextWrapping="Wrap"/>
+        <Label x:Name="lbl_kispEredmeny" Content="" HorizontalAlignment="Left" Height="34" Margin="346,166,0,0" VerticalAlignment="Top" Width="215" FontSize="16" HorizontalContentAlignment="Center"/>
+        <Label x:Name="lbl_nagypEredmeny" Content="" HorizontalAlignment="Left" Height="34" Margin="346,217,0,0" VerticalAlignment="Top" Width="215" FontSize="16" HorizontalContentAlignment="Center"/>
+        <Label x:Name="lbl_osszEredmeny" Content="" HorizontalAlignment="Left" Height="34" Margin="346,269,0,0" VerticalAlignment="Top" Width="215" FontSize="16" HorizontalContentAlignment="Center"/>
+        <Label x:Name="lbl_dbSzam" Content="" HorizontalAlignment="Left" Height="34" Margin="607,108,0,0" VerticalAlignment="Top" Width="94" FontSize="16" HorizontalContentAlignment="Center"/>
+        <Button x:Name="btn_hozzaad" Content="Versenyző hozzáadása" HorizontalAlignment="Left" Height="40" Margin="346,344,0,0" VerticalAlignment="Top" Width="215" FontSize="16"/>
+
+    </Grid>
+</Window>

@@ -1,0 +1,125 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+using static DLTfonok0904.MainWindow;
+
+using System.IO;
+
+namespace DLTfonok0904
+{
+    /// <summary>
+    /// Interaction logic for Newwindow.xaml
+    /// </summary>
+    public partial class Newwindow : Window
+    {
+        public Newwindow()
+        {
+            InitializeComponent();
+            List<Utazas> utazas = new List<Utazas>();
+
+            foreach (var item in File.ReadAllLines(@"..\..\..\SRC\utasadat.txt"))
+            {
+                utazas.Add(new Utazas(item));
+            }
+
+            foreach (var item in utazas)
+            {
+                Console.WriteLine(item);
+            }
+
+            //3.feladat
+
+            txb_1f.Text = "A buszra " + utazas.Count + " utas akart felszállni.";
+
+            //4.feladat
+
+            var f2 = 0;
+            for (int i = 0; i < utazas.Count; i++)
+            {
+                if (utazas[i].Tipus != "JGY" && utazas[i].Ervenyesseg.Date < utazas[i].Datum.Date)
+                {
+                    f2++;
+                }
+
+                else if (utazas[i].Tipus == "JGY" && utazas[i].ErvenyesE == 0)
+                {
+                    f2++;
+                }
+            }
+
+            txb_4f.Text = "A buszra " + f2 + " utas nem szállhatott fel.";
+
+            //5.feladat
+
+            var f3 = 0;
+            var index = 0;
+
+            List<int> megallok = new List<int>();
+
+            int legnagyobbmegallo = utazas.Max(u => u.Sorszam);
+
+            foreach (var item in utazas)
+            {
+                while (item.Sorszam >= megallok.Count)
+                {
+                    megallok.Add(0);
+                }
+                megallok[item.Sorszam]++;
+            }
+
+            for (int i = 0; i < megallok.Count; i++)
+            {
+                if (megallok[i] > f3)
+                {
+                    f3 = megallok[i];
+                    index = i;
+                }
+            }
+
+            txb_5f.Text = "A legtöbb utas (" + f3 + " fő) a " + index + ". megállóban próbált felszállni.";
+
+            //6.feladat
+
+            var f4ingyenes = 0;
+            var f4kedvezmenyes = 0;
+
+            for (int i = 0; i < utazas.Count; i++)
+            {
+                if (utazas[i].Tipus == "NYP" || utazas[i].Tipus == "RVS" || utazas[i].Tipus == "GYK" && utazas[i].Ervenyesseg > utazas[i].Datum)
+                {
+                    f4ingyenes++;
+                }
+                if (utazas[i].Tipus == "NYB" || utazas[i].Tipus == "TAB" && utazas[i].Ervenyesseg > utazas[i].Datum)
+                {
+                    f4kedvezmenyes++;
+                }
+            }
+
+            txb_6f1.Text = "Ingyenesen utazók száma: " + f4ingyenes + " fő";
+            txb_6f2.Text = "Kedvezményesen utazók száma: " + f4kedvezmenyes + " fő";
+
+            //7.feladat
+
+            StreamWriter sw = new StreamWriter(@"..\..\..\SRC\figyelmeztetes.txt");
+
+            for (int i = 0; i < utazas.Count; i++)
+            {
+                if (utazas[i].Tipus != "JGY" && utazas[i].Datum.AddDays(3) >= utazas[i].Ervenyesseg)
+                {
+                    sw.WriteLine($"{utazas[i].Azonosito} {utazas[i].Ervenyesseg:yyyy-MM-dd}");
+                }
+            }
+            sw.Close();
+        }
+    }
+}

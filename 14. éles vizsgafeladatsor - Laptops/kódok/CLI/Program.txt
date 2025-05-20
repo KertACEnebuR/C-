@@ -1,0 +1,60 @@
+using LaptopsCLI;
+using System;
+
+namespace MyApp
+{
+
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            List<Laptop> laptops = new List<Laptop>();
+
+            foreach (var item in File.ReadAllLines(@"..\..\..\SRC\laptops.txt").Skip(1))
+            {
+                laptops.Add(new Laptop(item));
+            }
+
+            Console.WriteLine("5.feladat - Kiírás");
+            for (int i = 0; i < laptops.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {laptops[i]} | {Math.Round(laptops[i].Price * 4.12)} HUF");
+            }
+
+            var ProcMeghajtoVizsg = laptops
+                .Where(e => e.CPU.Contains("Intel Core i7") && e.Storage.Contains("SSD"))
+                .ToList();
+
+            Console.WriteLine();
+            Console.WriteLine("6.feladat - Keresés");
+            for (int i = 0; i < ProcMeghajtoVizsg.Count; i++)
+            {
+                Console.WriteLine($"[{i + 1}] {ProcMeghajtoVizsg[i]}");
+            }
+
+            Console.WriteLine($"A laptopok átlag ára: {ProcMeghajtoVizsg.Average(e => e.Price)} INR");
+
+            Console.WriteLine();
+
+            Console.WriteLine("7.feladat - Fájlba írás");
+
+            var CheapLaptop = laptops
+            .Where(e => e.Category.CategoryName.Contains("Gaming"))
+            .OrderBy(e => e.Price)
+            .Take(20)
+            .ToList();
+
+            StreamWriter sw = new StreamWriter(@"..\..\..\SRC\cheap.txt");
+
+            foreach (var item in CheapLaptop)
+            {
+                sw.WriteLine($"{item.Manufacturer.ManufacturerName} {item.Model}" +
+                    $"\n\t{item.CPU}" +
+                    $"\n\t{item.Storage}" +
+                    $"\n\t{item.Screen}");
+            }
+
+            sw.Close();
+        }
+    }
+}

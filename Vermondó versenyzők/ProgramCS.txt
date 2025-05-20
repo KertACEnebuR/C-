@@ -1,0 +1,63 @@
+// See https://aka.ms/new-console-template for more information
+
+using System;
+using static System.Net.Mime.MediaTypeNames;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Windows;
+
+namespace MyApp
+{
+    public class Program
+    {
+        static void Main(string[] args)
+        {
+            List<Versenyzok> versenyzok = new List<Versenyzok>();
+
+            //2.feladat
+
+            foreach (var item in File.ReadAllLines(@"..\..\..\SRC\selejtezo.txt"))
+            {
+                versenyzok.Add(new Versenyzok(item));
+            }
+
+            //3.feladat
+
+            Console.WriteLine($"\n3.feladat: A versenyen {versenyzok.Count} versenyző vett részt.");
+
+            //4.feladat
+
+            Random rnd = new Random();
+
+            int zsuriRandom = rnd.Next(1, 7);
+
+            Console.WriteLine($"4.feladat: Kérem a zsűritag sorszámát: {zsuriRandom}");
+
+            //5.feladat
+
+            List<double> osszPont = new List<double>();
+
+            for (int i = 0; i < versenyzok.Count; i++)
+            {
+                osszPont.Add(versenyzok[i].Pontozas[zsuriRandom - 1]);
+            }
+           
+            Console.WriteLine($"5.feladat: A zsűritag által megadott pontszámok átlaga: {Math.Round(osszPont.Average(),2)}");
+
+            //6.feladat
+
+            //string LegnagyobbNev = versenyzok.Where(i => i.Pontozas.Sum() == i.Pontozas.Max()).Select(a => a.Nev);
+
+            var legnagyobb = versenyzok.OrderByDescending(a => a.Pontozas.Sum()).First();
+            var legnagyobbPontszam = legnagyobb.Pontozas.Sum();
+
+            Console.WriteLine($"6.feladat: A legtöbb pontot elérő versenyző neve: {legnagyobb.Nev} Pontszáma: {legnagyobbPontszam}");
+        }
+
+
+    }
+
+}
+
+

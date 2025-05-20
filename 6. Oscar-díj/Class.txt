@@ -1,0 +1,25 @@
+namespace OscarDij
+{
+    public partial class MainWindow
+    {
+        public class Oscar
+        {
+            public string Azonosito { get; set; }
+            public string Cim { get; set; }
+            public int Ev { get; set; }
+            public int Dij { get; set; }
+            public int Jeloles { get; set; }
+
+            public Oscar(string r)
+            {
+                var s = r.Split("\t");
+                Azonosito = s[0];
+                Cim = s[1];
+                Ev = int.Parse(s[2]);
+                Dij = int.Parse(s[3]);
+                Jeloles = int.Parse(s[4]);
+
+            }
+        }
+    }
+}

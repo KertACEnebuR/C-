@@ -1,0 +1,35 @@
+namespace MyApp
+{
+    internal partial class Program
+    {
+        public class KajakKenu
+        {
+            public string Nev { get; set; }
+            public int Azonosito { get; set; }
+            public string Tipus { get; set; }
+            public int Szemelyszam { get; set; }
+            public int ElvitelOra { get; set; }
+            public int ElvitelPerc { get; set; }
+            public int VisszahozatalOra { get; set; }
+            public int VisszahozatalPerc { get; set; }
+
+            public KajakKenu(string sor)
+            {
+                var r = sor.Split(';');
+                Nev = r[0];
+                Azonosito = int.Parse(r[1]);
+                Tipus = r[2];
+                Szemelyszam = int.Parse(r[3]);
+                ElvitelOra = int.Parse(r[4]);
+                ElvitelPerc = int.Parse(r[5]);
+                VisszahozatalOra = int.Parse(r[6]);
+                VisszahozatalPerc = int.Parse(r[7]);
+            }
+
+            public override string ToString()
+            {
+                return $"{Azonosito}\t";
+            }
+        }
+    }
+}

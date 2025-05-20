@@ -1,0 +1,42 @@
+using System.Globalization;
+
+namespace DLTfonok0904
+{
+    public partial class MainWindow
+    {
+        public class Utazas
+        {
+            public int Sorszam { get; set; }
+            public DateTime Datum { get; set; }
+            public double Azonosito { get; set; }
+            public string Tipus { get; set; }
+            public DateTime Ervenyesseg { get; set; }
+            public int ErvenyesE { get; set; }
+
+            public Utazas(string v)
+            {
+                string[] sor = v.Split(' ');
+                Sorszam = int.Parse(sor[0]);
+                string forma = "yyyyMMdd-HHmm";
+                Datum = DateTime.ParseExact(sor[1], forma, CultureInfo.InvariantCulture);
+                Azonosito = double.Parse(sor[2]);
+                Tipus = sor[3];
+                string forma2 = "yyyyMMdd";
+                if (sor[4].Length >= 8)
+                {
+                    Ervenyesseg = DateTime.ParseExact(sor[4], forma2, CultureInfo.InvariantCulture);
+                }
+                else
+                {
+                    ErvenyesE = int.Parse(sor[4]);
+                }
+                
+            }
+
+            public override string ToString()
+            {
+                return $"{Sorszam}; {Datum:yyyyMMdd-HHmm} {Azonosito}; {Tipus}; {Ervenyesseg:yyyyMMdd}";
+            }
+        }
+    }
+}

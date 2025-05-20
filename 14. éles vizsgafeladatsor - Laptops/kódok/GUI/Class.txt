@@ -1,0 +1,39 @@
+namespace LaptopsGUI
+{
+    public partial class MainWindow
+    {
+        class Laptop
+        {
+            public Category Category { get; set; }
+            public string CPU { get; set; }
+            public Manufacturer Manufacturer { get; set; }
+            public string Model { get; set; }
+            public string OS { get; set; }
+            public double Price { get; set; }
+            public int RAM { get; set; }
+            public string Screen { get; set; }
+            public string Storage { get; set; }
+            public string Kepatlo => Screen.Split('-')[0];  
+            public string Felbontas => Screen.Split('-')[1];
+
+            public Laptop(string s)
+            {
+                var r = s.Split(';');
+                Category = new Category(Convert.ToInt32(r[0]), r[1]);
+                CPU = r[2];
+                Manufacturer = new Manufacturer(Convert.ToInt32(r[3]), r[4]);
+                Model = r[5];
+                OS = r[6];
+                Price = double.Parse(r[7]);
+                RAM = int.Parse(r[8]);
+                Screen = r[9];
+                Storage = r[10];
+            }
+
+            public override string ToString()
+            {
+                return $"{Manufacturer.ManufacturerName} {Model}";
+            }
+        }
+    }
+}

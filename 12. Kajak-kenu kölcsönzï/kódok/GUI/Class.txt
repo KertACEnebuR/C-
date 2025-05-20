@@ -1,0 +1,76 @@
+namespace KajakkenuGUI
+{
+    public partial class MainWindow
+    {
+        public class KajakKenu
+        {
+            public string Nev { get; set; }
+            public int Azonosito { get; set; }
+            public string Tipus { get; set; }
+            public int Szemelyszam { get; set; }
+            public int ElvitelOra { get; set; }
+            public int ElvitelPerc { get; set; }
+            public int VisszahozatalOra { get; set; }
+            public int VisszahozatalPerc { get; set; }
+
+            public KajakKenu(string sor)
+            {
+                var r = sor.Split(';');
+                Nev = r[0];
+                Azonosito = int.Parse(r[1]);
+                Tipus = r[2];
+                Szemelyszam = int.Parse(r[3]);
+                ElvitelOra = int.Parse(r[4]);
+                ElvitelPerc = int.Parse(r[5]);
+                VisszahozatalOra = int.Parse(r[6]);
+                VisszahozatalPerc = int.Parse(r[7]);
+            }
+
+            public bool VizenVanE(int megadottOra, int megadottPerc)
+            {
+                int elvitelIdo = ElvitelOra * 60 + ElvitelPerc;
+                int visszahozatalIdo = VisszahozatalOra * 60 + VisszahozatalPerc;
+                int megadottIdo = megadottOra * 60 + megadottPerc;
+
+                return megadottIdo >= elvitelIdo && megadottIdo <= visszahozatalIdo;
+            }
+
+            public int KolcsonzesPerc()
+            {
+                int elvitelIdo = ElvitelOra * 60 + ElvitelPerc;
+                int visszahozatalIdo = VisszahozatalOra * 60 + VisszahozatalPerc;
+
+                return visszahozatalIdo - elvitelIdo;
+            }
+
+            public int FelOra()
+            {
+                if (KolcsonzesPerc() % 30 == 0)
+                {
+                    return KolcsonzesPerc() / 30;
+                }
+                else
+                {
+                    return (KolcsonzesPerc() + 29) / 30;
+                }                
+            }
+
+            public bool ValosHajoE(int Azon, string Tip, int ESzam)
+            {
+                if (Azonosito != Azon && Tipus != Tip && Szemelyszam != ESzam)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            public override string ToString()
+            {
+                return $"{Azonosito}.;\t{KolcsonzesPerc()} perc;\t{FelOra()} félóra";
+            }
+        }
+    }
+}

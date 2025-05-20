@@ -1,0 +1,128 @@
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace Setahajo
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        List<Hajo> hajok = new List<Hajo>();
+        Random rnd = new Random();
+        public MainWindow()
+        {
+            InitializeComponent();
+
+            foreach (var item in File.ReadAllLines(@"../../../SRC/hajok.txt"))
+            {
+                hajok.Add(new Hajo(item));
+            }
+
+            foreach (var item in hajok)
+            {
+                cmb_hajok.Items.Add(item.Nev);
+            }
+
+            //4.feladat
+
+            var Kishajok = hajok
+                .Where(a => a.MaxUtasSzam < 6)
+                .Select(e => new
+                {
+                    KisNev = e.Nev,
+                    KisAr = e.NapiBerletiDij
+                });
+
+            StreamWriter sw = new StreamWriter(@"../../../SRC/kishajok.txt");
+
+            foreach (var item in Kishajok)
+            {
+                sw.WriteLine($"{item.KisNev},{item.KisAr}");
+            }
+
+            sw.Close();
+
+             
+           
+
+        }
+
+        private void btn_szamolas_Click(object sender, RoutedEventArgs e)
+        {
+            //5.feladat
+            //plusz feladat
+
+            string valasztottHajo = (string)cmb_hajok.SelectedItem;
+
+            var ValasztottHajo = hajok
+               .Where(e => e.Nev == valasztottHajo);
+
+            int PluszTeljesKoltseg = 0;
+
+            if (int.TryParse(txb_napok.Text, out int napokSzama) && napokSzama > 0)
+            {
+                int teljesKoltseg = hajok.Sum(h => h.Osszar(napokSzama));
+                lbl_napikoltseg.Content = $"{napokSzama} napi költség: {teljesKoltseg} Ft";
+
+                foreach (var item in ValasztottHajo)
+                {
+                    PluszTeljesKoltseg = item.NapiBerletiDij * napokSzama;
+                }
+
+                lbl_Plusz.Content = $"{napokSzama} napi költség a {valasztottHajo} hajóra: {PluszTeljesKoltseg} Ft";
+            }
+            else
+            {
+                lbl_napikoltseg.Content = "Adj meg egy nap számot!";
+            }
+
+        }
+
+        private void btn_kereses_Click(object sender, RoutedEventArgs e)
+        {
+            //6.feladat
+
+            if (txb_utasok.Text != "")
+            {
+                int utasokSzama = int.Parse(txb_utasok.Text);
+
+                var hajokLista = hajok
+                    .Where(a => a.MaxUtasSzam >= utasokSzama)
+                    .Select(e => new
+                    {
+                        HNev = e.Nev,
+                        HAr = e.NapiBerletiDij,
+                        HUtasSzam = e.MaxUtasSzam
+                    });
+
+                var randomHajo = hajokLista
+                    .OrderBy(e => rnd.Next())
+                    .Take(1);
+
+                foreach (var item in randomHajo)
+                {
+                    lbl_ajanlat.Content = $"Ajánlott hajó: {item.HNev}";
+
+                    lbl_napidijEmber.Content = $"{item.HUtasSzam} Fő befogadására képes" +
+                        $"\nNapidíja: {item.HAr} Ft";
+                }
+            }
+            else
+            {
+                lbl_ajanlat.Content = "Add meg az utasok számát!";
+            }
+        }
+    }
+}

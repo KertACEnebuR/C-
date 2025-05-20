@@ -1,0 +1,51 @@
+<Window x:Class="DLTfonok0904.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DLTfonok0904"
+        mc:Ignorable="d"
+        Title="eUtazás 2020 – Új felszállás" Height="520" Width="500">
+    <Grid>
+        <Button x:Name="btn_UjWindow" Content="Új ablak megnyitása" HorizontalAlignment="Center" Margin="0,410,0,0" VerticalAlignment="Top" Height="26" Width="452" Click="btn_UjWindow_Click" FontSize="15"/>
+        <TextBox x:Name="txb_egy" HorizontalAlignment="Left" Margin="10,20,0,0" TextWrapping="Wrap" Text="Megálló sorszáma:" VerticalAlignment="Top" Width="163" BorderThickness="0,0,0,0"/>
+        <TextBox x:Name="txb_ketto" HorizontalAlignment="Left" Margin="10,59,0,0" TextWrapping="Wrap" Text="Felszállás dátuma:" VerticalAlignment="Top" Width="163" BorderThickness="0,0,0,0"/>
+        <TextBox x:Name="txb_harom" HorizontalAlignment="Left" Margin="10,97,0,0" TextWrapping="Wrap" Text="Felszállás időpontja [óó:pp]" VerticalAlignment="Top" Width="163" BorderThickness="0,0,0,0"/>
+        <TextBox x:Name="txb_negy" HorizontalAlignment="Left" Margin="10,143,0,0" TextWrapping="Wrap" Text="Kártya azonosítója:" VerticalAlignment="Top" Width="163" BorderThickness="0,0,0,0"/>
+        <ComboBox x:Name="cmb_egy" HorizontalAlignment="Left" Margin="186,18,0,0" VerticalAlignment="Top" Width="195" Text="Válasszon megállót!"/>
+        <DatePicker HorizontalAlignment="Left" Margin="186,56,0,0" VerticalAlignment="Top" Width="174"/>
+
+        <TextBox x:Name="txb_szam" HorizontalAlignment="Left" Height="13" Margin="335,145,0,0" Text="0db" VerticalAlignment="Top" Width="46" TextAlignment="Center" TextWrapping="WrapWithOverflow" BorderBrush="Black" BorderThickness="0,0,0,0" RenderTransformOrigin="0.391,0.751" TextChanged="txb_szam_TextChanged"/>
+        <GroupBox HorizontalAlignment="Left" Height="76" Header="Bérlet vagy jegy" Margin="329,223,0,0" VerticalAlignment="Top" Width="137">
+
+
+        </GroupBox>
+        <GroupBox x:Name="grb1" HorizontalAlignment="Left" Height="186" Header="Bérlet további adatai" Margin="18,175,0,0" VerticalAlignment="Top" Width="200" >
+            <Label x:Name="lblBt" Content="Bérlet típusa:" HorizontalAlignment="Left" Height="29" Margin="4,0,0,0" VerticalAlignment="Top" Width="124" />
+
+        </GroupBox>
+        <ComboBox x:Name="cmb_ketto" HorizontalAlignment="Left" Height="21" Margin="24,229,0,0" VerticalAlignment="Top" Width="188" Text="Válasszon típust!">
+            <ComboBoxItem Content="FEB"/>
+            <ComboBoxItem Content="TAB"/>
+            <ComboBoxItem Content="NYB"/>
+            <ComboBoxItem Content="NYP"/>
+            <ComboBoxItem Content="RVS"/>
+            <ComboBoxItem Content="GYK"/>
+        </ComboBox>
+        <Label x:Name="lblBE" Content="Bérlet érvényességi ideje:" HorizontalAlignment="Left" Height="27" Margin="24,260,0,0" VerticalAlignment="Top" Width="148" />
+        <DatePicker x:Name="dpc_egy" HorizontalAlignment="Left" Margin="186,56,0,0" VerticalAlignment="Top" Width="174"/>
+        <DatePicker x:Name="dpc_ketto" HorizontalAlignment="Left" Margin="24,292,0,168" Width="188" />
+        <RadioButton x:Name="rad1" Content="Bérlet" HorizontalAlignment="Left" Height="16" Margin="335,249,0,0" VerticalAlignment="Top" Width="108" Checked="Radiobutton_Checked"/>
+        <RadioButton x:Name="rad2" Content="Jegy" HorizontalAlignment="Left" Height="16" Margin="335,270,0,0" VerticalAlignment="Top" Width="108" Checked="Radiobutton_Checked"/>
+        <Button Content="Adatok ellenőrzése és rögzítése" HorizontalAlignment="Center" Height="27" Margin="0,368,0,0" VerticalAlignment="Top" Width="452" FontSize="15" Click="Button_Click"/>
+        <TextBox x:Name="txb_felsz" HorizontalAlignment="Left" Height="23" Margin="186,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143" TextChanged="txb_felsz_TextChanged"/>
+        <TextBox x:Name="txb_azon" HorizontalAlignment="Left" Height="23" Margin="186,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="118" TextChanged="txb_azon_TextChanged"/>
+        <GroupBox x:Name="grb2" HorizontalAlignment="Left" Height="127" Header="Jegy további adatai" Margin="29,201,0,0" VerticalAlignment="Top" Width="172"/>
+        <Label x:Name="lblJ" Content="Felhasználható jegy:" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="172" Margin="29,219,0,0"/>
+
+        <TextBox x:Name="txb_szam2" HorizontalAlignment="Left" Height="22" Margin="35,292,0,0" Text="0db" VerticalAlignment="Top" Width="46" TextAlignment="Center" TextWrapping="WrapWithOverflow" BorderBrush="Black" BorderThickness="0,0,0,0" RenderTransformOrigin="0.391,0.751" TextChanged="txb_szam_TextChanged" />
+        <Slider x:Name="slr_1" HorizontalAlignment="Left" Height="20" Margin="35,254,0,0" VerticalAlignment="Top" Width="166" ValueChanged="Slider_ValueChanged" />
+
+    </Grid>
+</Window>
+11:00 2025. 05. 20.

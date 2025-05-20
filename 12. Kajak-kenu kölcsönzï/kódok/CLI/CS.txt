@@ -1,0 +1,54 @@
+using System;
+
+namespace MyApp
+{
+    internal partial class Program
+    {
+
+        static void Main(string[] args)
+        {
+            List<KajakKenu> kajakkenu = new List<KajakKenu>();
+
+            foreach (var item in File.ReadLines(@"../../../SRC/kolcsonzes.txt").Skip(1))
+            {
+                kajakkenu.Add(new KajakKenu(item));
+            }
+
+            Console.WriteLine($"4. feladat: {kajakkenu.Count} db kölcsönzés.");
+
+            Console.Write("5. feladat: " +
+                "\nÍrj egy nevet: ");
+            var keresettNev = Console.ReadLine();
+            var keresettKolcsonzesek = kajakkenu.Where(k => k.Nev == keresettNev);
+
+            if (keresettKolcsonzesek.Any())
+            {
+                foreach (var item in keresettKolcsonzesek)
+                {
+                    Console.WriteLine($"\t{item.ElvitelOra}:{item.ElvitelPerc} - {item.VisszahozatalOra}:{item.VisszahozatalPerc}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("\tNem volt ilyen nevű kölcsönző!");
+            }
+
+            Console.Write("6. feladat: ");
+
+            int VendegMagyar = kajakkenu
+                .Where(e => !e.Nev
+                .Contains(','))
+                .Count();
+
+            int VendegKulfold = kajakkenu
+                .Where(e => e.Nev
+                .Contains(','))
+                .Count();
+
+            Console.WriteLine($"\nMagyar vendégek: {VendegMagyar} fő" +
+                              $"\nKülföldi vendégek: {VendegKulfold} fő");
+
+            Console.ReadLine();
+        }
+    }
+}

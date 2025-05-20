@@ -1,0 +1,45 @@
+using System.IO;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace OscarDij
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        List<Oscar> oscarDij = new List<Oscar>();
+        public MainWindow()
+        {
+            InitializeComponent();
+
+            foreach (var item in File.ReadAllLines(@"..\..\..\SRC\oscar.txt").Skip(1))
+            {
+                oscarDij.Add(new Oscar(item));
+            }
+
+            //2.feladat
+
+            List<Oscar> csokkenoLista = new List<Oscar>();
+
+            for (int i = 0; i < oscarDij.Count; i++)
+            {
+                
+            }
+
+            for (int i = 0; i < oscarDij.Count; i++)
+            {
+                lxb_filmek.Items.Add($"{oscarDij[i].Cim}; {oscarDij[i].Ev}");
+            }
+        }
+    }
+}
