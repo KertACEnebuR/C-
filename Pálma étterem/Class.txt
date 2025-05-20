@@ -1,0 +1,24 @@
+namespace Palma20240920
+{
+    public partial class MainWindow
+    {
+        public class Palma
+        {
+            public string Nev { get; set; }
+            public string Tipus { get; set; }
+            public bool JeloltE { get; set; }
+            public int Ar { get; set; }
+            public string EgysegNev { get; set; }
+
+            public Palma(string sor)
+            {
+                var tomb = sor.Split(";");
+                Nev = tomb[0];
+                Tipus = tomb[1];
+                JeloltE = bool.Parse(tomb[2]);
+                Ar = int.Parse(tomb[3]);
+                EgysegNev = tomb[4];
+            }
+        }
+    }
+}

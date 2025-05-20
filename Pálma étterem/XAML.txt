@@ -1,0 +1,35 @@
+<Window x:Class="Palma20240920.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Palma20240920"
+        mc:Ignorable="d"
+        Title="Pálma étterem" Height="500" Width="1000">
+    <Grid>
+        <TextBox x:Name="txb_ajanlat" HorizontalAlignment="Left" Height="25" Margin="31,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="305"/>
+        <TextBox x:Name="txb_dijnyertes" HorizontalAlignment="Left" Height="25" Margin="31,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="305"/>
+        <TextBox x:Name="txb_dragaNev" HorizontalAlignment="Left" Height="25" Margin="49,173,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="213"/>
+        <Label x:Name="lbl_legdragabb" Content="Legdrágább desszertünk:" HorizontalAlignment="Left" Height="32" Margin="31,129,0,0" VerticalAlignment="Top" Width="207" FontSize="14" BorderThickness="1,1,1,1" BorderBrush="#FFADA9A9"/>
+        <Label x:Name="lbl_legolcsobb" Content="Legolcsóbb desszertünk:" HorizontalAlignment="Left" Height="29" Margin="31,217,0,0" VerticalAlignment="Top" Width="207" FontSize="14" BorderThickness="1,1,1,1" BorderBrush="#FFAFA7A7"/>
+        <TextBox x:Name="txb_olcsoNev" HorizontalAlignment="Left" Height="25" Margin="49,262,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="213"/>
+        <TextBox x:Name="txb_olcsoArEgyseg" HorizontalAlignment="Left" Height="25" Margin="287,173,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175"/>
+        <TextBox x:Name="txb_dragaArEgyseg" HorizontalAlignment="Left" Height="25" Margin="287,262,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175"/>
+        <Label x:Name="lbl_tipus" Content="Típusa:" HorizontalAlignment="Left" Height="29" Margin="31,323,0,0" VerticalAlignment="Top" Width="125" FontSize="14" BorderThickness="1,1,1,1" BorderBrush="#FFAFA7A7"/>
+        <TextBox x:Name="txb_tipus" HorizontalAlignment="Left" Height="25" Margin="184,325,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="152"/>
+        <Button x:Name="btn_mentes" Content="Ajánlat mentése" HorizontalAlignment="Left" Height="35" Margin="31,378,0,0" VerticalAlignment="Top" Width="305" FontSize="16" Click="btn_mentes_Click"/>
+        <Rectangle HorizontalAlignment="Left" Height="385" Margin="595,28,0,0" Stroke="Black" VerticalAlignment="Top" Width="384"/>
+        <Label x:Name="lbl_FelNev" Content="Név:" HorizontalAlignment="Left" Height="29" Margin="626,55,0,0" VerticalAlignment="Top" Width="125" FontSize="14" BorderThickness="1,1,1,1" BorderBrush="#FFAFA7A7"/>
+        <Label x:Name="lbl_FelTipus" Content="Típus:" HorizontalAlignment="Left" Height="29" Margin="626,108,0,0" VerticalAlignment="Top" Width="125" FontSize="14" BorderThickness="1,1,1,1" BorderBrush="#FFAFA7A7"/>
+        <Label x:Name="lbl_FelEgyseg" Content="Egység:" HorizontalAlignment="Left" Height="29" Margin="626,164,0,0" VerticalAlignment="Top" Width="125" FontSize="14" BorderThickness="1,1,1,1" BorderBrush="#FFAFA7A7"/>
+        <Label x:Name="lbl_FelAr" Content="Ár:" HorizontalAlignment="Left" Height="29" Margin="626,225,0,0" VerticalAlignment="Top" Width="125" FontSize="14" BorderThickness="1,1,1,1" BorderBrush="#FFAFA7A7"/>
+        <Label x:Name="lbl_FelDijazott" Content="Díjazott" HorizontalAlignment="Left" Height="29" Margin="802,285,0,0" VerticalAlignment="Top" Width="125" FontSize="14" BorderThickness="1,1,1,1" BorderBrush="#FFAFA7A7"/>
+        <TextBox x:Name="txb_FelNev" HorizontalAlignment="Left" Height="25" Margin="787,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175"/>
+        <TextBox x:Name="txb_FelTipus" HorizontalAlignment="Left" Height="25" Margin="787,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175"/>
+        <TextBox x:Name="txb_FelEgyseg" HorizontalAlignment="Left" Height="25" Margin="787,168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175"/>
+        <TextBox x:Name="txb_FelAr" HorizontalAlignment="Left" Height="25" Margin="787,229,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175"/>
+        <Button x:Name="btn_felvetel" Content="Új süti felvétele" HorizontalAlignment="Left" Height="35" Margin="634,354,0,0" VerticalAlignment="Top" Width="306" FontSize="16" Click="btn_felvetel_Click"/>
+        <CheckBox x:Name="cxb_FelDijazott" Content="" HorizontalAlignment="Left" Height="21" Margin="723,293,0,0" VerticalAlignment="Top" Width="18"/>
+
+    </Grid>
+</Window>

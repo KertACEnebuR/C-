@@ -1,0 +1,158 @@
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace Palma20240920
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+
+            List<Palma> palma = new List<Palma>();
+
+            foreach (var item in File.ReadAllLines(@"..\..\..\SRC\palma.txt"))
+            {
+                palma.Add(new Palma(item));
+            }
+
+            //2.feladat
+
+            Random rnd = new Random();
+
+            int RandomNev = rnd.Next(1, 209);
+
+            for (int i = 0; i < palma.Count; i++)
+            {
+                txb_ajanlat.Text = $"Mai ajánlatunk: {palma[RandomNev].Nev}";
+            }
+
+            //3.feladat
+
+            var legolcsobb = palma[0].Ar; //palma.Select(a => a.Ar).Min();
+            var legdragabb = palma[0].Ar; //palma.Select(a => a.Ar).Max();
+
+            //var legdragabbNev = palma.Where(b => b.Ar == legdragabb).Select(a => a.Nev);
+            //var legolcsobbNev = palma.Where(b => b.Ar == legolcsobb).Select(a => a.Nev);
+
+            string legolcsobbNev = palma[0].Nev;
+            string legdragabbNev = palma[0].Nev;
+
+            var legragabbEgyseg = palma[0].EgysegNev;
+            var legolcsobbEgyseg = palma[0].EgysegNev;
+
+            for (int i = 0; i < palma.Count; i++)
+            {
+                if (palma[i].Ar < legolcsobb)
+                {
+                    legolcsobb = palma[i].Ar;
+                    legolcsobbNev = palma[i].Nev;
+                    legolcsobbEgyseg = palma[i].EgysegNev;
+                }
+
+                else if (palma[i].Ar > legdragabb)
+                {
+                    legdragabb = palma[i].Ar;
+                    legdragabbNev = palma[i].Nev;
+                    legragabbEgyseg = palma[i].EgysegNev;
+                }
+            }
+
+            txb_dragaNev.Text = $"{legdragabbNev}";
+            txb_olcsoNev.Text = $"{legolcsobbNev}";
+            txb_olcsoArEgyseg.Text = $"{legdragabb} Ft/{legragabbEgyseg}";
+            txb_dragaArEgyseg.Text = $"{legolcsobb} Ft/{legolcsobbEgyseg}";
+
+            //4.feladat
+
+            var dijazott = palma.Where(u => u.JeloltE == true).Count();
+
+            txb_dijnyertes.Text = $"{dijazott} féle díjnyertes édességből választhat.";
+
+            //5.feladat
+
+            StreamWriter sw = new StreamWriter(@"..\..\..\SRC\lista.txt");
+
+            for (int i = 0; i < palma.Count; i++)
+            {
+                sw.WriteLine($"{palma[i].Nev} {palma[i].Tipus}");
+            }
+
+            sw.Close();
+
+            //6.feladat
+
+            StreamWriter sw2 = new StreamWriter(@"..\..\..\SRC\stat.txt");
+
+            List<string> tipusok = new List<string>();
+            List<int> tipusDb = new List<int>();
+            int db = 0;
+
+            for (int i = 0; i < palma.Count; i++)
+            {
+                while (!tipusok.Contains(palma[i].Tipus))
+                {
+                    tipusok.Add(palma[i].Tipus);
+                    db++;
+                    tipusDb.Add(db);
+                }
+                db = 0;
+            }
+
+            foreach (var item in tipusok)
+            {
+                foreach (var i in tipusDb)
+                {
+                    sw2.WriteLine($"{item}-{i}");
+                }
+            }
+
+            sw2.Close();         
+
+        }
+
+        private void btn_mentes_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_felvetel_Click(object sender, RoutedEventArgs e)
+        {
+            StreamWriter sFelvetel = new StreamWriter(@"..\..\..\SRC\cuki.txt", true);
+
+            if (txb_FelNev.Text == null || txb_FelTipus.Text == null || txb_FelEgyseg.Text == null || txb_FelAr.Text == null)
+            {
+                MessageBox.Show("Hiányos az egyik felviteli mező!", "Hiba!");
+            }
+
+            else 
+            {
+                if ((bool)cxb_FelDijazott.IsChecked)
+                {
+                    sFelvetel.WriteLine($"{txb_FelNev.Text}; {txb_FelTipus.Text}; true; {txb_FelEgyseg.Text}; {txb_FelAr.Text}; ");
+                    MessageBox.Show("Sikeres felvitel", "Siker!");
+                }
+
+                else
+                {
+                    sFelvetel.WriteLine($"{txb_FelNev.Text}; {txb_FelTipus.Text}; false; {txb_FelEgyseg.Text}; {txb_FelAr.Text}; ");
+                    MessageBox.Show("Sikeres felvitel", "Siker!");
+                }
+            }         
+            sFelvetel.Close();
+        }
+    }
+}
